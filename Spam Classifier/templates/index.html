@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SMS Spam Classifier</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>    
+    .navbar {
+        background-color: #08514c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+    }
+    .navbar h1 {
+	color: #fff;
+	font-size: 35px;
+	font-weight: bold;
+    }
+    .home {
+
+    align-items: center;
+    justify-content: center;
+    height: 25vh; /* Set the height to cover the viewport */
+    }
+    .content {
+    max-width: 1200px;
+    text-align: center;
+    }
+    .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    </style>
+</head>
+<body style="background: url('{{ url_for('static', filename='images/Background.jpg') }}') no-repeat center center fixed; background-size:cover;">
+    <div class="navbar">
+    <h1>SMS Spam Classifier</h1>
+    </div>
+    <div class="container">
+        <div class="home">
+        <div class="content">
+    <form action="{{ url_for('predict')}}" method="POST">
+
+        <input name="message" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="Enter the Message here">
+        <br/>
+        <button type="submit" class="btn btn-success">Predict</button>
+    </form>
+
+    {% if prediction == 0%}
+        <br>
+        <h3 style="color:red;">Spam</h3>
+    {% elif prediction == 1%}
+        <br>
+		<h3 style="color:green;">Not a Spam</h3>
+    {% elif prediction == 2%}
+        <br>
+		<h3 style="color:#3b3595;">No SMS provided :(</h3>
+    {% endif %}
+</div>
+</div>
+</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</body>
+</html>
